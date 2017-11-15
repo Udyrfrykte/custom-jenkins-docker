@@ -72,6 +72,28 @@ RUN apt-get install -y python2.7 python-pip \
 RUN pip install cqlsh==5.0.3 \
   && sed -i 's/DEFAULT_PROTOCOL_VERSION = 4/DEFAULT_PROTOCOL_VERSION = 3/' /usr/local/bin/cqlsh
 
+# NODE #
+# nvm environment variables
+ENV NVM_DIR /usr/local/nvm
+ENV NODE_VERSION 6.9.1
+
+# install nvm
+# https://github.com/creationix/nvm#install-script
+RUN curl --silent -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.2/install.sh | bash
+
+# install node and npm
+RUN bash -c 'source $NVM_DIR/nvm.sh \
+    && nvm install $NODE_VERSION \
+    && nvm alias default $NODE_VERSION \
+    && nvm use default'
+
+# add node and npm to path so the commands are available
+ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
+ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
+
+RUN npm install -g bower gulp-cli && npm install gulp -D
+########
+
 # install libs required by docker
 # docker socket and binary will be mounted from host but we need to put jenkins in the docker group
 RUN https_proxy="${proxy}" http_proxy="${proxy}" apt-get install -y libltdl7 \
