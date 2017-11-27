@@ -46,7 +46,7 @@ RUN mkdir /etc/ssl/certs/java \
 ADD start.sh /
 
 # install tools
-RUN apt-get install -y git curl sshpass ksh
+RUN apt-get install -y git curl sshpass ksh zip unzip
 
 # install maven
 RUN apt-get install -y maven
