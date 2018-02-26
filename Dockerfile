@@ -32,7 +32,7 @@ RUN echo 'deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main' >| /
 RUN echo 'deb http://pkg.jenkins-ci.org/debian binary/' >| /etc/apt/sources.list.d/jenkins.list \
   && wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | apt-key add - \
   && apt-get update \
-  && apt-get install -y --ignore-missing jenkins=2.85
+  && apt-get install -y --ignore-missing jenkins=2.109
 
 # set jenkins home directory to the right value
 RUN usermod -d /var/lib/jenkins jenkins
@@ -64,9 +64,9 @@ RUN apt-get install -y bzip2 binutils libc-dev \
   && bash -c '. /opt/anaconda/bin/activate && conda install -y gcc py-xgboost' \
   && rm -rf /opt/anaconda-install.sh
 
-# install ansible
+# install python tools (ansible, virtualenv)
 RUN apt-get install -y python2.7 python-pip \
-  && pip install ansible==2.3.2.0
+  && pip install ansible==2.3.2.0 virtualenv==15.1.0
 
 # install cqlsh (reusing pip from ansible) and dirty hack to make it work with strange DSE version
 RUN pip install cqlsh==5.0.3 \
