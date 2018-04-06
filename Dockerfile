@@ -91,7 +91,7 @@ RUN bash -c 'source $NVM_DIR/nvm.sh \
 ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
 ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
-RUN npm install -g bower gulp-cli && npm install gulp -D
+RUN npm install -g bower gulp-cli @angular/cli && npm install gulp -D
 ########
 
 # install libs required by docker
