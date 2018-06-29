@@ -32,7 +32,7 @@ RUN echo 'deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main' >| /
 RUN echo 'deb http://pkg.jenkins-ci.org/debian binary/' >| /etc/apt/sources.list.d/jenkins.list \
   && wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | apt-key add - \
   && apt-get update \
-  && apt-get install -y --ignore-missing jenkins=2.109
+  && apt-get install -y --ignore-missing jenkins=2.129
 
 # set jenkins home directory to the right value
 RUN usermod -d /var/lib/jenkins jenkins
@@ -94,9 +94,10 @@ ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 RUN npm install -g bower gulp-cli @angular/cli && npm install gulp -D
 ########
 
-# install libs required by docker
+# install libs required by docker and install docker-compose
 # docker socket and binary will be mounted from host but we need to put jenkins in the docker group
 RUN https_proxy="${proxy}" http_proxy="${proxy}" apt-get install -y libltdl7 \
+  && pip install docker-compose==1.21.2 \
   && groupadd -g 169 docker \
   && usermod -a -G docker jenkins
 
