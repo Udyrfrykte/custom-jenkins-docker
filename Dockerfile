@@ -79,7 +79,8 @@ ENV NODE_VERSION 8.11.3
 
 # install nvm
 # https://github.com/creationix/nvm#install-script
-RUN curl --silent -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
+RUN mkdir $NVM_DIR \
+    && curl --silent -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
 
 # install node and npm
 RUN bash -c 'source $NVM_DIR/nvm.sh \
