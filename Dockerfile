@@ -75,11 +75,11 @@ RUN pip install cqlsh==5.0.3 \
 # NODE #
 # nvm environment variables
 ENV NVM_DIR /usr/local/nvm
-ENV NODE_VERSION 6.9.1
+ENV NODE_VERSION 8.11.3
 
 # install nvm
 # https://github.com/creationix/nvm#install-script
-RUN curl --silent -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.2/install.sh | bash
+RUN curl --silent -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
 
 # install node and npm
 RUN bash -c 'source $NVM_DIR/nvm.sh \
