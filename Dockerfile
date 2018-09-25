@@ -72,6 +72,13 @@ RUN apt-get install -y python2.7 python-pip \
 RUN pip install cqlsh==5.0.3 \
   && sed -i 's/DEFAULT_PROTOCOL_VERSION = 4/DEFAULT_PROTOCOL_VERSION = 3/' /usr/local/bin/cqlsh
 
+# install puppeteer dependencies
+RUN apt-get install -y gconf-service libasound2 libatk1.0-0 libc6 libcairo2 libcups2 \
+  libdbus-1-3 libexpat1 libfontconfig1 libgcc1 libgconf-2-4 libgdk-pixbuf2.0-0 libglib2.0-0 \
+  libgtk-3-0 libnspr4 libpango-1.0-0 libpangocairo-1.0-0 libstdc++6 libx11-6 libx11-xcb1 libxcb1 \
+  libxcomposite1 libxcursor1 libxdamage1 libxext6 libxfixes3 libxi6 libxrandr2 libxrender1 \
+  libxss1 libxtst6 ca-certificates fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils 
+
 # NODE #
 # nvm environment variables
 ENV NVM_DIR /usr/local/nvm
@@ -92,8 +99,7 @@ RUN bash -c 'source $NVM_DIR/nvm.sh \
 ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
 ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
-RUN npm install -g bower gulp-cli @angular/cli && npm install gulp -D
-########
+RUN npm install -g bower yarn gulp-cli @angular/cli && npm install gulp -D
 
 # install libs required by docker and install docker-compose
 # docker socket and binary will be mounted from host but we need to put jenkins in the docker group
