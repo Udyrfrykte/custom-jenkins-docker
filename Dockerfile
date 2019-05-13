@@ -99,7 +99,7 @@ RUN bash -c 'source $NVM_DIR/nvm.sh \
 ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
 ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
-RUN npm install -g bower yarn gulp-cli @angular/cli && npm install gulp -D
+RUN npm install -g bower yarn gulp-cli @angular/cli newman && npm install gulp -D
 
 # install libs required by docker and install docker-compose
 # docker socket and binary will be mounted from host but we need to put jenkins in the docker group
